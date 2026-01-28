@@ -12,3 +12,5 @@ class PelanganController extends Controller
        return view('pelanggan.index',$data);
     }
 }
+
+// return view('pelanggan.index', $data);
