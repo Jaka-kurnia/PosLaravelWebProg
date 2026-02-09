@@ -8,18 +8,26 @@
 </head>
 <body>
     <h1>Kategori</h1>
-
-    <table>
+<a href="/categories/create">Tambah Data</a>
+    <table border="1">
         <thead>
-            <th>
-                <td>No</td>
-                <td>Nama Kategori</td>
-            </th>
+            <tr>
+                <th>No</th>
+                <th>Nama Kategori</th>
+                <th>Aksi</th>
+            </tr>
         </thead>
         <tbody>
             @foreach ($categories as $item )
-                <td>{{ $item->id }}</td>
-                {{-- <td>{{ $item-> }}</td> --}}
+              <tr>
+                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->category_name }}</td>
+                  <td>
+                    <a href="/categories/edit/{{ $item->id }}">
+                    Edit
+                    </a>
+                  </td>
+              </tr>
             @endforeach
         </tbody>
     </table>
