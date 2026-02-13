@@ -26,6 +26,9 @@
                     <a href="/categories/edit/{{ $item->id }}">
                     Edit
                     </a>
+                    <a href="/categories/delete/{{ $item->id }}">
+                    delete
+                    </a>
                   </td>
               </tr>
             @endforeach

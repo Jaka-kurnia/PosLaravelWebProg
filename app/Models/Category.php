@@ -9,19 +9,31 @@ class Category extends Model
 {
     public static function getAll()
     {
-        $categories = DB::table('categories')->get();
-        return $categories;
+        return DB::table('categories')->get();
     }
 
     public static function store($data)
     {
-        $data = DB::table('categories')->insert($data);
-        return $data;
+        return DB::table('categories')->insert($data);
     }
 
-    public static function getCategorybyId($id)
+    public static function getCategoryById($id)
     {
-        $categories = DB::table('categories')->where('id', $id)->first();
-        return $categories;
+        return DB::table('categories')
+            ->where('id', $id) // pastikan integer
+            ->first();
     }
+
+    public static function updateData($id, $data)
+    {
+        return DB::table('categories')
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    // public static function deleteData()
+    // {
+    //     $data = DB::table('categories')->where('id', $data)->delete($data);
+    //     return $data;
+    // }
 }

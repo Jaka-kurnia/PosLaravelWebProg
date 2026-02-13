@@ -11,4 +11,22 @@ class Book extends Model
         $book = DB::table('books')->get();
         return $book;
     }
+
+    public static function store($data){
+        return DB::table('books')->insert($data);
+    }
+
+
+    public static function getBookById($id)
+    {
+        return DB::table('books')
+            ->where('id', $id) // pastikan integer
+            ->first();
+    }
+
+    public static function perbaruiData($id,$data){
+        return DB::table('books')
+        ->where('id',$id)
+        ->update($data);
+    }
 }

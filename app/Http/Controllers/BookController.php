@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('book.create');
     }
 
     /**
@@ -30,7 +30,21 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    // dd($request->kode_buku);
+        $data = [
+        'kode_buku' => $request->kode_buku,
+        'judul_buku' => $request->judul_buku,
+        'stock'         => $request->stock
+        ];
+
+        $store = Book::store($data);
+
+        if($store){
+            echo "Data tersimpan";
+        }else{
+            "Gagal tersimpan";
+        }
     }
 
     /**
@@ -44,17 +58,30 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        //
+        $book = Book::getBookById($id);
+        return view('book.edit', compact('book'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+        $data = [
+            'kode_buku' => $request->kode_buku,
+            'judul_buku' => $request->judul_buku,
+            'stock'         => $request->stock
+
+        ];
+        $update = Book::perbaruiData($id,$data);
+
+        if ($update) {
+            echo "Data Berhasil di update";
+        } else {
+            echo "Data Gagal disimpan";
+        }
     }
 
     /**
