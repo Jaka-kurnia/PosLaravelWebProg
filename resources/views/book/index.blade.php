@@ -30,7 +30,7 @@
                     <td>{{ $item->stock }}</td>
                     <td>
                         <a href="/book/edit/{{ $item->id }}">Edit</a>
-                        <a href="">Hapus</a>
+                        <a href="/book/delete/{{ $item->id }}">Hapus</a>
                     </td>
                 </tr>
             @endforeach

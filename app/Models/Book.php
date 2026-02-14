@@ -29,4 +29,10 @@ class Book extends Model
         ->where('id',$id)
         ->update($data);
     }
+
+    // public static function destroy($id){
+    //     return DB::table('books')
+    //     ->where('id',$id)
+    //     ->delete();
+    // }
 }
