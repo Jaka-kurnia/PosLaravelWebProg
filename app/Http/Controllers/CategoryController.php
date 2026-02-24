@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::getAll();
+        $categories = Category::getAll($request);
 
         return view('categories.index', compact('categories'));
     }
@@ -19,17 +19,19 @@ class CategoryController extends Controller
         return view('categories.create');
     }
 
-    public function store(Request $request)
+    public function store( Request $request)
     {
-        //    dd($request->category_name);
-        $data = [
-            'category_name' => $request->category_name,
+        $data =[
+            'category_name' => $request->category_name
         ];
+
         $store = Category::store($data);
-        if ($store) {
-            echo "data tersimpan";
-        } else {
-            echo "Data Gagal sisimpan";
+       
+        if($store){
+            return redirect('/categories')->with('success', 'Data berhasil dsimpan');
+
+        }else{
+            echo "Data Gagal disimpan";
         }
     }
 
@@ -47,22 +49,19 @@ class CategoryController extends Controller
         $update = Category::updateData($id, $data);
 
         if ($update) {
-            echo "Data Berhasil di update";
+             return redirect('/categories')->with('success', 'Data berhasil diupdate');
         } else {
-            echo "Data Gagal disimpan";
+            echo "Data Gagal diupdate";
         }
     }
 
-    // public function delete(Request $request , $id){
-    //     $data = [
-    //         'category_name' =>$request->category_name
-    //     ];
-    //     $delete = Category::deleteData($id, $data);
-
-    //     if($delete){
-    //         echo "data berhasil di hapus";
-    //     }else{
-    //          echo "data gagal di hapus";
-    //     }
-    // }
+    public function destroy($id)
+    {
+        $delete = Category::deleteData($id);
+        if ($delete) {
+            return redirect('/categories')->with('success', 'Data berhasil dihapus');
+        } else {
+            echo "Data Gagal dihapus";
+        }
+    }
 }

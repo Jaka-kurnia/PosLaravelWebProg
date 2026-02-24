@@ -18,12 +18,13 @@ Route::get('/pelanggan', [PelanganController::class, 'index']);
 Route::get('/customer', [CustomerController::class, 'index']);
 
 
-
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/create', [CategoryController::class, 'create']);
-Route::post('/categories/store', [CategoryController::class, 'store']);
-Route::get('/categories/edit/{id}', [CategoryController::class, 'edit']);
-Route::put('/categories/update/{id}', [CategoryController::class, 'update']);
+// Materi Kuliah Kategori Routes
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
 // Belajar

@@ -7,9 +7,18 @@ use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
-    public static function getAll()
+    public static function getAll($request)
     {
-        return DB::table('categories')->get();
+        $query = DB::table('categories');
+        if (!empty($request->category_name)) {
+            $query->where('category_name', 'like', '%' . $request->category_name . '%');
+        }
+
+        if (!empty($request->id)) {
+            $query->where('id', $request->id);
+        }
+        $categories = $query->get();
+        return $categories;
     }
 
     public static function store($data)
@@ -31,9 +40,8 @@ class Category extends Model
             ->update($data);
     }
 
-    // public static function deleteData()
-    // {
-    //     $data = DB::table('categories')->where('id', $data)->delete($data);
-    //     return $data;
-    // }
+    public static function deleteData($id)
+    {
+        return  DB::table('categories')->where('id', $id)->delete();
+    }
 }

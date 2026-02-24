@@ -1,4 +1,4 @@
-<form action="/categories/update/{{ $categories->id }}" method="POST">
+<form action="{{ route('categories.update', $categories->id) }}" method="POST">
     @csrf
     @method('PUT')
     <label for="">Kategori</label>
