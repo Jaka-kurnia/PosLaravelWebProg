@@ -11,6 +11,18 @@
 <body>
     <h1>Halaman Produk</h1>
     <a href="{{ route('product.create') }}">Tambah Produk</a>
+    <br>
+    @if (session('success'))
+        <div>{{ session('success') }}</div>
+    @endif
+<br>
+    <form action="/product" method="GET">
+        <input type="text" name="product_name" id="" placeholder="Nama Produk"
+            value="{{ Request('product_name') }}">
+        <button type="submit"> Cari data</button>
+    </form>
+    
+    <br>
 
     <table border="1" style="">
         <thead border=>

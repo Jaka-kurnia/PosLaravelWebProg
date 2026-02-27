@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::getAll(request());
+        $products = Product::getAll($request);
         return view('product.index', compact('products'));
     }
 

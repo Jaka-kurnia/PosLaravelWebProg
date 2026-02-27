@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FieldController;
 use App\Http\Controllers\PelanganController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,10 @@ Route::post('/product/store', [ProductController::class, 'store'])->name('produc
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+
+Route::get('/field', [FieldController::class, 'index'])->name('field.index');
+Route::get('/field/create', [FieldController::class, 'create'])->name('field.create');
+Route::post('field/store', [FieldController::class, 'store'])->name('field.store');
+Route::get('/field/edit/{id}' , [FieldController::class, 'edit'])->name('field.edit');
+Route::put('/field/update/{id}' , [FieldController::class, 'update'])->name('field.update');

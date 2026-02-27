@@ -9,7 +9,6 @@ class Product extends Model
 {
     public static function getAll($request)
     {
-        // Gunakan select untuk menghindari tumpang tindih kolom 'id' atau 'name' antara produk dan kategori
         $query = DB::table('products')
             ->select('products.*', 'categories.category_name as category_name')
             ->join('categories', 'products.category_id', '=', 'categories.id');
