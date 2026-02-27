@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_code' , 4);
+            $table->char('customer_code', 6);
             $table->string('customer_name');
             $table->text('customer_address');
-             $table->string('customer_phone');
             $table->timestamps();
         });
     }

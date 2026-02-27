@@ -2,20 +2,19 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PelanganController;
-use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/produk', [ProdukController::class, 'index']);
+
 
 Route::get('/pelanggan', [PelanganController::class, 'index']);
 
-Route::get('/customer', [CustomerController::class, 'index']);
+
 
 
 // Materi Kuliah Kategori Routes
@@ -35,3 +34,12 @@ Route::post('/book/store', [BookController::class, 'store']);
 Route::get('/book/edit/{id}', [BookController::class, 'edit']);
 Route::put('/book/update/{id}', [BookController::class, 'update']);
 Route::delete('/book/destroy/{id}', [BookController::class, 'destroy']);
+
+
+
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::delete('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
