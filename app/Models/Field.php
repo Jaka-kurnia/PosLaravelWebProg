@@ -29,4 +29,9 @@ class Field extends Model
     public static function updateData($id , $data){
         return DB::table('fields')->where('id' , $id)->update($data);
     }
+
+
+    public static function deleteData($id ){
+        return DB::table('fields')->where('id' , $id)->delete();
+    }
 }

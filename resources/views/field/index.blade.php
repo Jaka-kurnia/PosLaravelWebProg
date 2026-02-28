@@ -36,14 +36,18 @@
                     <td>{{ $item->price }}</td>
                     <td>
                         <a href="{{ route('field.edit', $item->id) }}">Edit</a>
-                        <form action="">
-
+                        <form action="{{ route('filed.destroy', $item->id) }}" method="POST" style="display: inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Apakah Anda Yakin ingin menghapush data?')">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td>Data Kosong</td>
+                    <td colspan="5" style="text-align: center;">Data Kosong</td>
                 </tr>
             @endforelse
 

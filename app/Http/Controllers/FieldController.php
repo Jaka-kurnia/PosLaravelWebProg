@@ -85,8 +85,8 @@ class FieldController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Field $field)
+    public function destroy($id)
     {
-        //
+        $delete = Field::deleteData($id);
     }
 }

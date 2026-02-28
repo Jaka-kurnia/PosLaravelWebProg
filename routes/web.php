@@ -51,3 +51,4 @@ Route::get('/field/create', [FieldController::class, 'create'])->name('field.cre
 Route::post('field/store', [FieldController::class, 'store'])->name('field.store');
 Route::get('/field/edit/{id}' , [FieldController::class, 'edit'])->name('field.edit');
 Route::put('/field/update/{id}' , [FieldController::class, 'update'])->name('field.update');
+Route::delete('/field/destroy/{id}' , [FieldController::class, 'destroy'])->name('filed.destroy');
