@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_buku',6);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('judul_buku');
-            $table->integer('stock');
             $table->timestamps();
         });
     }

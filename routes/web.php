@@ -27,16 +27,6 @@ Route::put('/categories/update/{id}', [CategoryController::class, 'update'])->na
 Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
-// Belajar
-Route::get('/book', [BookController::class, 'index']);
-Route::get('/book/create', [BookController::class, 'create']);
-// Route::get('/book/store', [BookController::class, 'store']);
-Route::post('/book/store', [BookController::class, 'store']);
-Route::get('/book/edit/{id}', [BookController::class, 'edit']);
-Route::put('/book/update/{id}', [BookController::class, 'update']);
-Route::delete('/book/destroy/{id}', [BookController::class, 'destroy']);
-
-
 
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -52,3 +42,6 @@ Route::post('field/store', [FieldController::class, 'store'])->name('field.store
 Route::get('/field/edit/{id}' , [FieldController::class, 'edit'])->name('field.edit');
 Route::put('/field/update/{id}' , [FieldController::class, 'update'])->name('field.update');
 Route::delete('/field/destroy/{id}' , [FieldController::class, 'destroy'])->name('filed.destroy');
+
+
+Route::get('/book', [BookController::class, 'index'])->name('book.index');

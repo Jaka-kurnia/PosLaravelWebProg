@@ -9,33 +9,18 @@
 </head>
 
 <body>
-    <h1>Halaman Buku</h1>
-    <a href="/book/create">Tambah Data</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kode Buku</th>
-                <th>Nama Buku</th>
-                <th>Stock</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($book as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->kode_buku }}</td>
-                    <td>{{ $item->judul_buku }}</td>
-                    <td>{{ $item->stock }}</td>
-                    <td>
-                        <a href="/book/edit/{{ $item->id }}">Edit</a>
-                        <a href="/book/delete/{{ $item->id }}">Hapus</a>
-                    </td>
-                </tr>
+    <h1>Daftar Penulis & Buku</h1>
+
+    @foreach ($semua_penulis as $penulis)
+        <h3>Penulis: {{ $penulis->name }}</h3>
+
+        <ul>
+            @foreach ($penulis->books as $buku)
+                <li>Judul: {{ $buku->judul_buku }}</li>
             @endforeach
-        </tbody>
-    </table>
+        </ul>
+        <hr>
+    @endforeach
 </body>
 
 </html>

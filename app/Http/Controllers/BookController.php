@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,9 +13,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::ambilSemua() ;
-        
-        return view('book.index', compact('book'));
+        $semua_penulis = User::with('books')->get();
+
+        return view('book.index' , compact('semua_penulis'));
     }
 
     /**
@@ -22,7 +23,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        //
     }
 
     /**
@@ -30,21 +31,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-
-    // dd($request->kode_buku);
-        $data = [
-        'kode_buku' => $request->kode_buku,
-        'judul_buku' => $request->judul_buku,
-        'stock'         => $request->stock
-        ];
-
-        $store = Book::store($data);
-
-        if($store){
-            echo "Data tersimpan";
-        }else{
-            "Gagal tersimpan";
-        }
+        //
     }
 
     /**
@@ -58,43 +45,24 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        $book = Book::getBookById($id);
-        return view('book.edit', compact('book'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        $data = [
-            'kode_buku' => $request->kode_buku,
-            'judul_buku' => $request->judul_buku,
-            'stock'         => $request->stock
-
-        ];
-        $update = Book::perbaruiData($id,$data);
-
-        if ($update) {
-            echo "Data Berhasil di update";
-        } else {
-            echo "Data Gagal disimpan";
-        }
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    // public function destroy(Book $id)
-    // {
-    //     // buat fungsi delete disini
-    //     $delete = Book::destroy($id);
-    //     if ($delete) {
-    //         echo "Data Berhasil dihapus";
-    //     } else {
-    //         echo "Data Gagal dihapus";
-    //     }
-    // }
+    public function destroy(Book $book)
+    {
+        //
+    }
 }
