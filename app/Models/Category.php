@@ -3,45 +3,54 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+
 
 class Category extends Model
 {
-    public static function getAll($request)
-    {
-        $query = DB::table('categories');
-        if (!empty($request->category_name)) {
-            $query->where('category_name', 'like', '%' . $request->category_name . '%');
-        }
 
-        if (!empty($request->id)) {
-            $query->where('id', $request->id);
-        }
-        $categories = $query->get();
-        return $categories;
-    }
+    protected $fillable = [
+        'category_name'
+    ];
+    // public static function getAll($request)
+    // {
+    //     $query = DB::table('categories');
+    //     if (!empty($request->category_name)) {
+    //         $query->where('category_name', 'like', '%' . $request->category_name . '%');
+    //     }
 
-    public static function store($data)
-    {
-        return DB::table('categories')->insert($data);
-    }
+    //     if (!empty($request->id)) {
+    //         $query->where('id', $request->id);
+    //     }
+    //     $categories = $query->get();
+    //     return $categories;
+    // }
 
-    public static function getCategoryById($id)
-    {
-        return DB::table('categories')
-            ->where('id', $id) // pastikan integer
-            ->first();
-    }
+    // public static function store($data)
+    // {
+    //     return DB::table('categories')->insert($data);
+    // }
 
-    public static function updateData($id, $data)
-    {
-        return DB::table('categories')
-            ->where('id', $id)
-            ->update($data);
-    }
+    // public static function getCategoryById($id)
+    // {
+    //     return DB::table('categories')
+    //         ->where('id', $id) // pastikan integer
+    //         ->first();
+    // }
 
-    public static function deleteData($id)
+    // public static function updateData($id, $data)
+    // {
+    //     return DB::table('categories')
+    //         ->where('id', $id)
+    //         ->update($data);
+    // }
+
+    // public static function deleteData($id)
+    // {
+    //     return  DB::table('categories')->where('id', $id)->delete();
+    // }
+
+    public function products()
     {
-        return  DB::table('categories')->where('id', $id)->delete();
+        return $this->hasMany(Product::class);
     }
 }

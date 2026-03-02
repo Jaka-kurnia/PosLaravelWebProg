@@ -15,13 +15,13 @@
     @if (session('success'))
         <div>{{ session('success') }}</div>
     @endif
-<br>
+    <br>
     <form action="/product" method="GET">
         <input type="text" name="product_name" id="" placeholder="Nama Produk"
             value="{{ Request('product_name') }}">
         <button type="submit"> Cari data</button>
     </form>
-    
+
     <br>
 
     <table border="1" style="">
@@ -40,7 +40,7 @@
             @foreach ($products as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->category_name }}</td>
+                    <td>{{ $item->category->category_name }}</td>
                     <td>{{ $item->product_code }}</td>
                     <td>{{ $item->product_name }}</td>
                     <td>{{ $item->price }}</td>
@@ -49,7 +49,8 @@
                         <a href="{{ route('product.edit', $item->id) }}">
                             Edit
                         </a>
-                        <form action="{{ route('product.destroy', $item->id) }}" method="POST" style="display: inline">
+                        <form action="{{ route('product.destroy', $item->id) }}" method="POST"
+                            style="display: inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"
