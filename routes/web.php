@@ -27,7 +27,7 @@ Route::put('/categories/update/{id}', [CategoryController::class, 'update'])->na
 Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
-
+// Route Products
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');

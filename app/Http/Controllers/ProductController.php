@@ -47,17 +47,22 @@ class ProductController extends Controller
         }
     }
 
-    public function edit($id)
-    {
-        $product = Product::getProductById($id);
-        $categories = Category::getAll(request());
+  public function edit($id)
+{
+    $product = Product::getProductById($id);
+    
+    // Ganti ini:
+    // $categories = Category::getAll(request());
+    
+    // Menjadi ini (Ambil semua tanpa filter/pagination):
+    $categories = Category::all(); 
 
-        if (!$product) {
-            return redirect('/product')->with('error', 'Data tidak ditemukan');
-        }
-
-        return view('product.edit', compact('product', 'categories'));
+    if (!$product) {
+        return redirect('/product')->with('error', 'Data tidak ditemukan');
     }
+
+    return view('product.edit', compact('product', 'categories'));
+}
 
     public function update(Request $request, $id)
     {
@@ -71,7 +76,7 @@ class ProductController extends Controller
         ]);
 
         $data = [
-            'category_id'  => $request->category_id, // DIPERBAIKI: sesuaikan dengan nama input di Blade
+            'category_id'  => $request->category_id,
             'product_code' => $request->product_code,
             'product_name' => $request->product_name,
             'price'        => $request->price,
@@ -80,7 +85,7 @@ class ProductController extends Controller
 
         $update = Product::updateData($id, $data);
         
-        // Menggunakan !== false karena Query Builder update bisa mengembalikan 0 jika data tidak ada yang berubah
+        
         if ($update !== false) {
             return redirect('/product')->with('success', 'Data berhasil diupdate');
         } else {
