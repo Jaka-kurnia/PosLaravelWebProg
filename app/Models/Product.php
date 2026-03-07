@@ -53,6 +53,7 @@ protected $guarded = [
     // }
 
     public function category(){
+        // Satu ke satu, produk hanya punya satu kategori, maka gunakan belongsTo
         return $this->belongsTo(Category::class);
     }
 }

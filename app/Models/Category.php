@@ -51,6 +51,7 @@ class Category extends Model
 
     public function products()
     {
+        // Satu ke banyak, satu kategori bisa punya banyak produk, maka gunakan hasMany
         return $this->hasMany(Product::class);
     }
 }
