@@ -22,14 +22,19 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Tambahkan Validasi agar tidak Error SQL lagi
-        // $request->validate([
-        //     'category_id'  => 'required',
-        //     'product_code' => 'required|unique:products,product_code',
-        //     'product_name' => 'required',
-        //     'price'        => 'required|numeric',
-        //     'unit'         => 'required',
-        // ]);
+
+        $request->validate([
+            'product_code'   => 'required',
+            'product_name'  => 'required',
+            'price'                => 'required|numeric',
+            'unit'                  => 'required',
+            'category_id'       => 'required'
+        ],[
+            'product_code.required'  => 'product code wajib diisi',
+            'price.required'               => 'Harga wajib diisi',
+            'price.numeric'                => 'Harga Wajib Angka'
+        ]);
+        
 
         // $data = [
         //     'category_id'  => $request->category_id, 
@@ -47,17 +52,17 @@ class ProductController extends Controller
         }
     }
 
-  public function edit($id)
-{
-    $product = Product::find($id);
-    $categories = Category::all();
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $categories = Category::all();
 
-    if (!$product) {
-        return redirect('/product')->with('error', 'Data tidak ditemukan');
+        if (!$product) {
+            return redirect('/product')->with('error', 'Data tidak ditemukan');
+        }
+
+        return view('product.edit', compact('product', 'categories'));
     }
-
-    return view('product.edit', compact('product', 'categories'));
-}
 
     public function update(Request $request, $id)
     {
@@ -87,18 +92,18 @@ class ProductController extends Controller
         }
     }
 
-   public function destroy($id)
-{
-    $product = Product::find($id);
-    $delete = $product->delete();
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        $delete = $product->delete();
 
-    if ($delete) {
-        return redirect('/product')->with('success', 'Data produk berhasil dihapus');
-    } else {
-        
-        
-        // Menggunakan back() agar user tidak keluar dari halaman jika gagal
-        return back()->with('error', 'Data gagal dihapus atau ID tidak ditemukan');
+        if ($delete) {
+            return redirect('/product')->with('success', 'Data produk berhasil dihapus');
+        } else {
+
+
+            // Menggunakan back() agar user tidak keluar dari halaman jika gagal
+            return back()->with('error', 'Data gagal dihapus atau ID tidak ditemukan');
+        }
     }
-}
 }

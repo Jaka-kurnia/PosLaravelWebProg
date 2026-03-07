@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\PelanganController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SuplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,3 +46,13 @@ Route::delete('/field/destroy/{id}' , [FieldController::class, 'destroy'])->name
 
 
 Route::get('/book', [BookController::class, 'index'])->name('book.index');
+
+
+// Route Suplier
+
+Route::get('/suplier', [SuplierController::class, 'index'])->name('suplier.index');
+Route::get('/suplier/create', [SuplierController::class, 'create'])->name('suplier.create');
+Route::post('/suplier/store', [SuplierController::class, 'store'])->name('suplier.store');
+Route::get('/suplier/edit/{id}', [SuplierController::class, 'edit'])->name('suplier.edit');
+Route::put('/suplier/update/{id}', [SuplierController::class, 'update'])->name('suplier.update');
+Route::delete('/suplier/destroy/{id}', [SuplierController::class, 'destroy'])->name('suplier.destroy');
