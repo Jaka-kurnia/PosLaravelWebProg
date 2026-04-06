@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Suplier;
 use Illuminate\Http\Request;
-use Symfony\Component\Routing\Route;
+
 
 class SuplierController extends Controller
 {
@@ -32,9 +32,9 @@ class SuplierController extends Controller
     {
         $request->validate([
             'suplier_code'  => 'required',
-            'suplier_name'  => 'required',
-            'address'       => 'required',
-            'phone'         => 'required'
+            'suplier_name'  => 'required|string',
+            'address'       => 'required|string',
+            'phone'         => 'required|numeric'
         ], [
             'suplier_code.required'  => 'Kode Suplier wajib diisi',
             'suplier_name.required'  => 'Nama Suplier wajib diisi',
@@ -79,9 +79,9 @@ class SuplierController extends Controller
     {
         $request->validate([
             'suplier_code'  => 'required',
-            'suplier_name'  => 'required',
-            'address'       => 'required',
-            'phone'         => 'required'
+            'suplier_name'  => 'required|string',
+            'address'       => 'required|string',
+            'phone'         => 'required|numeric'
         ], [
             'suplier_code.required'  => 'Kode Suplier wajib diisi',
             'suplier_name.required'  => 'Nama Suplier wajib diisi',
