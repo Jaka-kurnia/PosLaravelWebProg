@@ -25,7 +25,8 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             // Sekarang method session() akan terbaca
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/dashboard')
+            ->with('success', 'Selamat datang! Anda berhasil masuk ke sistem.');;
         }
 
         // Jika gagal, kembalikan dengan error
