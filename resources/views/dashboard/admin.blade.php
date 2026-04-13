@@ -11,6 +11,7 @@
 <body>
     <h1>Dashboard</h1>
 <h2>List Menu</h2>
+<b>login as: {{ Auth::user()->name }}</b> ({{ Auth::user()->role}})
     <ul>
         <li>
             <a href="{{ route('product.index') }}">Products</a>

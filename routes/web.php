@@ -8,6 +8,7 @@ use App\Http\Controllers\FieldController;
 use App\Http\Controllers\PelanganController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SuplierController;
+use App\Http\Middleware\CekRole;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,12 +23,16 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard']);
     // Materi Kuliah Kategori Routes
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
-    Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    Route::middleware(CekRole::class . ':admin')->group(function () {
+        Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    });
+
     Route::post('/proseslogout', [AuthController::class, 'prosesLogout'])->name('proseslogout');
     Route::get('/pelanggan', [PelanganController::class, 'index']);
     // Route Products
