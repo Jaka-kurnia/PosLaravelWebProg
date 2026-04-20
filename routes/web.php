@@ -15,15 +15,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'login'])->name('login');
-    // Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/proseslogin', [AuthController::class, 'prosesLogin'])->name('proseslogin');
 });
 
-
+// Auth Middleware: Hanya untuk user yang SUDAH login
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
-    // Materi Kuliah Kategori Routes
 
+    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+
+    /**
+     * PERBAIKAN LOGOUT: 
+     * Gunakan satu route yang konsisten. Di sini saya tetap gunakan /logout 
+     * karena biasanya dipanggil dari form logout di sidebar/navbar.
+     */
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Materi Kuliah Kategori Routes (Admin Only)
     Route::middleware(CekRole::class . ':admin')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -33,8 +40,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     });
 
-    Route::post('/proseslogout', [AuthController::class, 'prosesLogout'])->name('proseslogout');
+    // Pelanggan
     Route::get('/pelanggan', [PelanganController::class, 'index']);
+
     // Route Products
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -43,20 +51,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-
+    // Route Field
     Route::get('/field', [FieldController::class, 'index'])->name('field.index');
     Route::get('/field/create', [FieldController::class, 'create'])->name('field.create');
     Route::post('field/store', [FieldController::class, 'store'])->name('field.store');
     Route::get('/field/edit/{id}', [FieldController::class, 'edit'])->name('field.edit');
     Route::put('/field/update/{id}', [FieldController::class, 'update'])->name('field.update');
-    Route::delete('/field/destroy/{id}', [FieldController::class, 'destroy'])->name('filed.destroy');
+    Route::delete('/field/destroy/{id}', [FieldController::class, 'filed.destroy']); // Perbaiki typo filed -> field jika perlu di controller
 
-
+    // Route Book
     Route::get('/book', [BookController::class, 'index'])->name('book.index');
 
-
-    // Route Suplier
-
+    // Route Supplier
     Route::get('/suplier', [SuplierController::class, 'index'])->name('suplier.index');
     Route::get('/suplier/create', [SuplierController::class, 'create'])->name('suplier.create');
     Route::post('/suplier/store', [SuplierController::class, 'store'])->name('suplier.store');

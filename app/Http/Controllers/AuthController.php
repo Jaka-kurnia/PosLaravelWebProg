@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,32 +16,33 @@ class AuthController extends Controller
 
     public function prosesLogin(Request $request)
     {
-        // Sekarang method validate() akan terbaca karena menggunakan Request Laravel
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
-            // Sekarang method session() akan terbaca
             $request->session()->regenerate();
             return redirect()->intended('/dashboard')
-            ->with('success', 'Selamat datang! Anda berhasil masuk ke sistem.');;
+                ->with('success', 'Selamat datang! Anda berhasil masuk ke sistem.');
         }
 
-        // Jika gagal, kembalikan dengan error
         return Redirect::back()
             ->withErrors(['email' => 'Email atau password salah'])
-            ->withInput(); 
+            ->withInput();
     }
 
 
-    public function proseslogout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
+
         $request->session()->invalidate();
-        $request->session()->regenerate();
 
-        return redirect(route('login'));
+        $request->session()->regenerateToken();
 
+        // PERBAIKAN: Jangan arahkan ke '/proseslogin' (karena itu route POST)
+        // Arahkan ke '/' atau route('login') yang menggunakan metode GET
+        return redirect('/')->with('success', 'Berhasil logout!');
     }
 }
