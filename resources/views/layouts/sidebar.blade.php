@@ -1,4 +1,4 @@
-<aside class="w-64 bg-slate-50/50 border-r border-slate-100 flex flex-col flex-shrink-0 transition-all duration-300">
+<aside class="w-64 bg-slate-50/50 border-r border-slate-100 flex flex-col shrink-0 transition-all duration-300">
             <!-- Logo -->
             <div class="h-20 flex items-center px-6 gap-3">
                 <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white font-bold">

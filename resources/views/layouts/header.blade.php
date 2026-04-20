@@ -1,4 +1,4 @@
-<header class="h-20 bg-white border-b border-slate-100 px-8 flex items-center justify-between flex-shrink-0">
+<header class="h-20 bg-white border-b border-slate-100 px-8 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3 text-slate-500 font-medium">
                     <div class="p-1.5 border border-slate-200 rounded-md">
                         <i data-lucide="menu" class="w-4 h-4"></i>

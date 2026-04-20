@@ -11,9 +11,9 @@
     @stack('styles')
 </head>
 
-<body class="bg-gradient-to-br from-orange-50 via-rose-50 to-orange-100 min-h-screen flex items-center justify-center p-0 md:p-8 font-sans text-slate-800">
+<body class="bg-linear-to-br from-orange-50 via-rose-50 to-orange-100 min-h-screen flex items-center justify-center p-0 md:p-8 font-sans text-slate-800">
 
-    <div class="w-full max-w-[1440px] h-screen md:h-[90vh] bg-white/80 backdrop-blur-md md:rounded-[2rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex overflow-hidden border border-white/50">
+    <div class="w-full max-w-[1440px] h-screen md:h-[90vh] bg-white/80 backdrop-blur-md md:rounded-4xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex overflow-hidden border border-white/50">
 
         @include('layouts.sidebar')
 
