@@ -10,7 +10,7 @@
     <div class="flex-1 overflow-y-auto px-4 py-4 space-y-6">
 
         <div>
-            <a href="#" id="nav-dashboard" onclick="switchTab('dashboard')"
+            <a href="{{ route('dashboard') }}" id="nav-dashboard" onclick="switchTab('dashboard')"
                 class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all {{ request()->is('dashboard*') ? 'bg-indigo-50 text-indigo-600 shadow-sm' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' }}">
                 <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                 Dashboard

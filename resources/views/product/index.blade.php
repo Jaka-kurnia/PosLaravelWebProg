@@ -21,17 +21,43 @@
             @endif
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6">
-                <form action="/product" method="GET" class="flex flex-wrap gap-3">
+                <form action="/product" method="GET" class="flex flex-wrap md:flex-nowrap gap-3">
                     <div class="relative flex-1 min-w-[200px]">
                         <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
                         <input type="text" name="product_name" placeholder="Cari nama produk..."
                             value="{{ Request('product_name') }}"
-                            class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-sm text-slate-600">
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm text-slate-600">
                     </div>
-                    <button type="submit"
-                        class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors">
-                        Cari Data
-                    </button>
+
+                    <div class="relative min-w-[180px]">
+                        <select name="category_id"
+                            class="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm text-slate-600 appearance-none">
+                            <option value="">Semua Kategori</option>
+                            @foreach ($categories as $cat)
+                                <option value="{{ $cat->id }}"
+                                    {{ Request('category_id') == $cat->id ? 'selected' : '' }}>
+                                    {{ $cat->category_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <i data-lucide="chevron-down"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit"
+                            class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i data-lucide="filter" class="w-4 h-4"></i>
+                            Filter
+                        </button>
+
+                        @if (Request('product_name') || Request('category_id'))
+                            <a href="/product"
+                                class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center">
+                                Reset
+                            </a>
+                        @endif
+                    </div>
                 </form>
             </div>
 

@@ -8,11 +8,27 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
-    {
-        $products = Product::all();
-        return view('product.index', compact('products'));
+    public function index(Request $request){
+    $categories =Category::all(); 
+
+    // 2. Logika pencarian produk
+    $query =Product::query();
+
+    if ($request->filled('product_name')) {
+        $query->where('product_name', 'like', '%' . $request->product_name . '%');
     }
+
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+
+    $products = $query->get();
+
+    return view('product.index', compact('products', 'categories'));
+    
+}
+    // filter by category
+    
 
     public function create()
     {
@@ -29,12 +45,12 @@ class ProductController extends Controller
             'price'                => 'required|numeric',
             'unit'                  => 'required',
             'category_id'       => 'required'
-        ],[
+        ], [
             'product_code.required'  => 'product code wajib diisi',
             'price.required'               => 'Harga wajib diisi',
             'price.numeric'                => 'Harga Wajib Angka'
         ]);
-        
+
 
         // $data = [
         //     'category_id'  => $request->category_id, 

@@ -21,7 +21,7 @@ Route::middleware('guest')->group(function () {
 // Auth Middleware: Hanya untuk user yang SUDAH login
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     /**
      * PERBAIKAN LOGOUT: 
