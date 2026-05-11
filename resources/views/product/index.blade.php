@@ -1,9 +1,60 @@
-@extends('layouts.app')
+@extends('layouts.vuexy.vuexy')
+@section('page_title', 'Manajemen Produk')
+@section('title', 'Manajemen Produk')
 @section('content')
-    <div class="p-6 bg-slate-50 min-h-screen">
-        <div class="max-w-6xl mx-auto">
 
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex flex-row-reverse mb-3">
+                <a href="{{ route('product.create') }}" class="btn btn-primary">Tambah Data</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kategori</th>
+                        <th>Kode</th>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th>Unit</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($products as $index => $item)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $item->category->category_name }}</td>
+                            <td>{{ $item->product_code }}</td>
+                            <td>{{ $item->product_name }}</td>
+                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->unit }}</td>
+                            <td>
+                                <a href="{{ route('product.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                    Edit
+                                    <i class="ti ti-edit">
+
+                                    </i>
+                                </a>
+                                <a href="{{ route('product.destroy', $item->id) }}" class="btn btn-danger btn-sm">
+                                    Hapus
+                                    <i class="ti ti-trash">
+
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">Tidak ada data</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{-- <div class="p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <h1 class="text-2xl font-bold text-slate-800">Halaman Produk</h1>
                 <a href="{{ route('product.create') }}"
                     class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all shadow-sm text-sm font-medium">
@@ -128,5 +179,5 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

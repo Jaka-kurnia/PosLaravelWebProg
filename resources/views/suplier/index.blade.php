@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.vuexy.vuexy')
+@section('page_title', 'Manajemen Supplier')
+@section('title', 'Manajemen Supplier')
 
 @section('content')
 <div class="p-6 sm:p-8">

@@ -1,12 +1,9 @@
-@extends('layouts.app')
-
+@extends('layouts.vuexy.vuexy')
+@section('page_title', 'Manajemen Kategori')
+@section('title' , 'Manajemen Kategori')
 @section('content')
     <div class="p-6 sm:p-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-                <h1 class="text-2xl font-bold text-slate-900">Manajemen Kategori</h1>
-                <p class="text-sm text-slate-500 mt-1">Kelola kategori produk untuk sistem Anda.</p>
-            </div>
 
             <a href="{{ route('categories.create') }}"
                 class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-lg shadow-green-100 transition-all active:scale-95">
