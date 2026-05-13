@@ -59,9 +59,9 @@
                                 <td><span class="badge bg-label-secondary">{{ $item->unit }}</span></td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
-                                        <a href="{{ route('product.edit', $item->id) }}"
-                                            class="btn btn-sm btn-icon btn-warning" data-bs-toggle="tooltip"
-                                            title="Edit Data">
+                                        <a href="#" class="btn btn-sm btn-icon btn-warning btnEdit"
+                                            data-bs-toggle="tooltip" title="Edit Data"
+                                            data-product-id="{{ $item->id }}">
                                             <i class="ti ti-edit"></i>
                                         </a>
 
@@ -88,6 +88,12 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{-- tampilkan paginate dan rapihkan  --}}
+                <div class="d-flex  mt-4">
+                    <ul class="pagination pagination-primary">
+                        {{ $products->links() }}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -118,7 +124,14 @@
                 $("#title").text("Tambah Data Produk");
                 $("#loadForm").load("/product/create");
             });
-            
+
+            $(".btnEdit").click(function(e) {
+                e.preventDefault();
+              $.ajax({
+                type: 'GET'
+                url: '/'
+              })
+            })
         })
     </script>
 @endpush

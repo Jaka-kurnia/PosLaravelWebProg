@@ -63,7 +63,7 @@
             <button type="reset" class="btn btn-label-secondary">
                 <i class="ti ti-refresh me-1"></i> Reset
             </button>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="btnsubmmit">
                 <i class="ti ti-device-floppy me-1"></i> Simpan Data
             </button>
         </div>
@@ -136,11 +136,14 @@
                 confirmButtonText: 'OK',
                 didClose: () => {
                     $("#category_id").focus();
-
-
                 }
             });
             return false;
         }
+
+        $("#btnsubmmit").prop("disabled", true);
+        $("#btnsubmmit").html(
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...'
+            );
     });
 </script>

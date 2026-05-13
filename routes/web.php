@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::post('field/store', [FieldController::class, 'store'])->name('field.store');
     Route::get('/field/edit/{id}', [FieldController::class, 'edit'])->name('field.edit');
     Route::put('/field/update/{id}', [FieldController::class, 'update'])->name('field.update');
-    Route::delete('/field/destroy/{id}', [FieldController::class, 'filed.destroy']); // Perbaiki typo filed -> field jika perlu di controller
+    Route::delete('/field/destroy/{id}', [FieldController::class, 'filed.destroy']);
 
     // Route Book
     Route::get('/book', [BookController::class, 'index'])->name('book.index');
