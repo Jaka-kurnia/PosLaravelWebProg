@@ -36,3 +36,9 @@
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
+
+    <style>
+        .swal2-container{
+            z-index: 9999;
+        }
+    </style>

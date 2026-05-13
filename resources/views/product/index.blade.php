@@ -7,20 +7,24 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             {{-- Form select dan pencarian --}}
             <form action="{{ route('product.index') }}" method="GET" class="d-flex">
-                <input type="text" name="product_name" class="form-control me-2" placeholder="Nama Produk">
+                <input type="text" name="product_name" class="form-control me-2" placeholder="Nama Produk"
+                    value="{{ Request('product_name') }}">
                 <select name="category_id" class="form-select me-2">
                     <option value="">Semua Kategori</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                        <option value="{{ $category->id }}"
+                            {{ Request('category_id') == $category->id ? 'selected' : ' ' }}>
+                            {{ $category->category_name }}
+                        </option>
                     @endforeach
                 </select>
                 <button type="submit" class="btn btn-primary">
-                    <i class="ti ti-search me-1"></i>
+                    <i class="ti ti-search "></i>
                     Cari
                 </button>
             </form>
             {{-- End form --}}
-            <a href="{{ route('product.create') }}" class="btn btn-primary">
+            <a href="#" class="btn btn-primary" id="btnTambahData">
                 <i class="ti ti-plus me-1"></i> Tambah Produk
             </a>
         </div>
@@ -87,4 +91,44 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="loadForm">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('myscripts')
+    <script>
+        $(function() {
+            $("#btnTambahData").click(function() {
+
+
+                $("#productModal").modal("show");
+                $("#title").text("Tambah Data Produk");
+                $("#loadForm").load("/product/create");
+            });
+            
+        })
+    </script>
+@endpush
+
+{{-- 
+Swal.fire({
+  title: 'Error!',
+  text: 'Do you want to continue',
+  icon: 'error',
+  confirmButtonText: 'Cool'
+})
+
+--}}

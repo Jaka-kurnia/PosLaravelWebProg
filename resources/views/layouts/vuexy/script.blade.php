@@ -20,3 +20,9 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    {{-- Sweet Alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    @stack('myscripts')
