@@ -107,7 +107,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadForm">
-
                 </div>
             </div>
         </div>
@@ -118,30 +117,17 @@
     <script>
         $(function() {
             $("#btnTambahData").click(function() {
-
-
                 $("#productModal").modal("show");
                 $("#title").text("Tambah Data Produk");
                 $("#loadForm").load("/product/create");
             });
-
             $(".btnEdit").click(function(e) {
                 e.preventDefault();
-              $.ajax({
-                type: 'GET'
-                url: '/'
-              })
+                $.ajax({
+                    type: 'GET',
+                    url: '/'
+                })
             })
         })
     </script>
 @endpush
-
-{{-- 
-Swal.fire({
-  title: 'Error!',
-  text: 'Do you want to continue',
-  icon: 'error',
-  confirmButtonText: 'Cool'
-})
-
---}}

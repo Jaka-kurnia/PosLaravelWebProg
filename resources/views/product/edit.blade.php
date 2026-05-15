@@ -1,103 +1,156 @@
-@extends('layouts.app')
+<div class="modal-header">
+    <h5 class="modal-title" id="editProductModalTitle">Edit Produk</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form action="{{ route('product.update', $product->id) }}" method="POST" id="formProduct">
+        @csrf
+        @method('PUT')
+        <div class="row g-3 mb-4">
 
-@section('content')
-    <div class="p-6 sm:p-8 max-w-3xl">
-        <div class="mb-8">
-            <a href="{{ route('product.index') }}"
-                class="inline-flex items-center text-sm text-slate-500 hover:text-blue-600 transition-colors mb-4 group">
-                <i data-lucide="arrow-left" class="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform"></i>
-                Kembali ke Daftar Produk
-            </a>
-            <h1 class="text-2xl font-bold text-slate-900">Edit Produk</h1>
-            <p class="text-sm text-slate-500 mt-1">Perbarui detail informasi, kategori, dan harga produk Anda.</p>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <form action="{{ route('product.update', $product->id) }}" method="POST" class="p-6 sm:p-8 space-y-6">
-                @csrf
-                @method('PUT')
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2 md:col-span-2">
-                        <label for="category_id" class="text-sm font-bold text-slate-700">Kategori Produk</label>
-                        <div class="relative">
-                            <select name="category_id" id="category_id" required
-                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 appearance-none transition-all">
-                                <option value="">-- Pilih Kategori --</option>
-                                @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ old('category_id', $product->category_id) == $item->id ? 'selected' : '' }}>
-                                        {{ $item->category_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
-                            </div>
-                        </div>
-                        @error('category_id')
-                            <p class="text-xs text-rose-500 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="product_code" class="text-sm font-bold text-slate-700">Kode Produk</label>
-                        <input type="text" name="product_code" id="product_code"
-                            value="{{ old('product_code', $product->product_code) }}" placeholder="Contoh: PRD-001"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all @error('product_code') @enderror">
-                        @error('product_code')
-                            <p class="text-xs text-rose-500 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="product_name" class="text-sm font-bold text-slate-700">Nama Produk</label>
-                        <input type="text" name="product_name" id="product_name"
-                            value="{{ old('product_name', $product->product_name) }}" placeholder="Masukkan nama produk"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all @error('product_name') @enderror">
-                        @error('product_name')
-                            <p class="text-xs text-rose-500 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="price" class="text-sm font-bold text-slate-700">Harga Jual</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-4 flex items-center text-slate-400 text-sm font-medium">
-                                Rp
-                            </span>
-                            <input type="text" name="price" id="price" value="{{ old('price', $product->price) }}"
-                                placeholder="0"
-                                class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all @error('price') @enderror">
-                        </div>
-                        @error('price')
-                            <p class="text-xs text-rose-500 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="space-y-2">
-                        <label for="unit" class="text-sm font-bold text-slate-700">Satuan (Unit)</label>
-                        <input type="text" name="unit" id="unit" value="{{ old('unit', $product->unit) }}"
-                            placeholder="Contoh: Pcs, Box, Kg"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all @error('unit') @enderror">
-                        @error('unit')
-                            <p class="text-xs text-rose-500 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
+            {{-- Kode Produk --}}
+            <div class="col-12 col-md-6">
+                <label class="form-label text-muted small fw-medium">Kode Produk</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="ti ti-hash"></i></span>
+                    <input type="text" class="form-control" name="product_code" placeholder="PRD-001"
+                        id="product_code" value="{{ $product->product_code }}">
                 </div>
+            </div>
 
-                <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-3">
-                    <button type="submit"
-                        class="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-100 transition-all active:scale-95 flex items-center justify-center">
-                        <i data-lucide="save" class="w-4 h-4 mr-2"></i>
-                        Update Produk
-                    </button>
-                    <a href="{{ route('product.index') }}"
-                        class="w-full sm:w-auto px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-bold rounded-xl transition-all text-center">
-                        Batal
-                    </a>
+            {{-- Nama Produk --}}
+            <div class="col-12 col-md-6">
+                <label class="form-label text-muted small fw-medium">Nama Produk</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="ti ti-package"></i></span>
+                    <input type="text" class="form-control" name="product_name" placeholder="Nama lengkap produk"
+                        id="product_name" value="{{ $product->product_name }}">
                 </div>
-            </form>
+            </div>
+
+            {{-- Harga --}}
+            <div class="col-12 col-md-6">
+                <label class="form-label text-muted small fw-medium">Harga Jual</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text fw-medium">Rp</span>
+                    <input type="number" class="form-control" name="price" placeholder="50000" id="price"
+                        value="{{ $product->price }}">
+                </div>
+            </div>
+
+            {{-- Satuan --}}
+            <div class="col-12 col-md-6">
+                <label class="form-label text-muted small fw-medium">Satuan</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="ti ti-box"></i></span>
+                    <input type="text" class="form-control" name="unit" placeholder="Pcs, Kg, Box" id="unit"
+                        value="{{ $product->unit }}">
+                </div>
+            </div>
+
+            {{-- Kategori --}}
+            <div class="col-12">
+                <label class="form-label text-muted small fw-medium">Kategori Produk</label>
+                <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="ti ti-list"></i></span>
+                    <select class="form-select" name="category_id" id="category_id">
+                        <option value="" disabled>— Pilih kategori produk —</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
         </div>
-    </div>
-@endsection
+        <div class="modal-footer">
+            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal">
+                <i class="ti ti-refresh me-1"></i> Reset
+            </button>
+            <button type="submit" class="btn btn-primary" id="btnsubmmit">
+                <i class="ti ti-device-floppy me-1"></i> Simpan Data
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $("#formProduct").submit(function(e) {
+        let product_code = $("#product_code").val();
+        let product_name = $("#product_name").val();
+        let price = $("#price").val();
+        let unit = $("#unit").val();
+        let category_id = $(this).find("#category_id").val();
+
+        if (product_code == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Product Code must be filled ',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                didClose: () => {
+                    $("#product_code").focus();
+                }
+            });
+            return false;
+        } else if (product_name == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Product Name must be filled ',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                didClose: () => {
+                    $("#product_name").focus();
+
+                }
+            });
+            return false;
+        } else if (price == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Price must be filled ',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                didClose: () => {
+                    $("#price").focus();
+
+
+                }
+            });
+            return false;
+        } else if (unit == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Unit must be filled ',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                didClose: () => {
+                    $("#unit").focus();
+
+
+                }
+            });
+            return false;
+        } else if (category_id == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Category must be selected ',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                didClose: () => {
+                    $("#category_id").focus();
+                }
+            });
+            return false;
+        }
+
+        $("#btnsubmmit").prop("disabled", true);
+        $("#btnsubmmit").html(
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...'
+        );
+        return true;
+    });
+</script>

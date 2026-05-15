@@ -1,7 +1,6 @@
 <div class="p-6 sm:p-8 bg-white rounded-lg shadow-sm">
     <form action="{{ route('product.store') }}" method="POST" id="formProduct">
         @csrf
-
         <div class="row g-3 mb-4">
 
             {{-- Kode Produk --}}
