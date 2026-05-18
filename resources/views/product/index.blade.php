@@ -66,11 +66,10 @@
                                         </a>
 
                                         {{-- Form Hapus yang Aman --}}
-                                        <form action="{{ route('product.destroy', $item->id) }}" method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                                        <form action="{{ route('product.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-danger"
+                                            <button type="submit" class="btn btn-sm btn-icon btn-danger btnDelete"
                                                 data-bs-toggle="tooltip" title="Hapus Data">
                                                 <i class="ti ti-trash"></i>
                                             </button>
@@ -123,10 +122,23 @@
             });
             $(".btnEdit").click(function(e) {
                 e.preventDefault();
-                $.ajax({
-                    type: 'GET',
-                    url: '/'
+                var productId = $(this).data('product-id');
+                $("#productModal").modal("show");
+                $("#title").text("Edit Data Produk");
+                $("#loadForm").load("/product/" + productId + "/edit");
+            });
+
+            $(".btnDelete").click(function(e) {
+                let form = $(this).closest('form')
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure to Delete this data',
+                    text: 'Data will be deleted',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                    showCancelButton: true,
                 })
+
             })
         })
     </script>

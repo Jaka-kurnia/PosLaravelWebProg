@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\PelanganController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Middleware\CekRole;
 use Illuminate\Support\Facades\Route;
@@ -70,3 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/suplier/update/{id}', [SuplierController::class, 'update'])->name('suplier.update');
     Route::delete('/suplier/destroy/{id}', [SuplierController::class, 'destroy'])->name('suplier.destroy');
 });
+
+Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
+Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');

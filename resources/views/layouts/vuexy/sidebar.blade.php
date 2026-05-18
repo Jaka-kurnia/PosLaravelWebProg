@@ -58,6 +58,12 @@
                  </li>
              </ul>
          </li>
+         <li class="menu-item {{ request()->is('sales') ? 'active' : '' }}">
+             <a href="{{route('sales.index')}}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
+                 <div>Sales Transection</div>
+             </a>
+         </li>
          <li class="menu-item">
              <a href="app-email.html" class="menu-link">
                  <i class="menu-icon tf-icons ti ti-mail"></i>
