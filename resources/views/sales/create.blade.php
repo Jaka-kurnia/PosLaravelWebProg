@@ -59,18 +59,21 @@
                     <select class="form-select" name="product_id" id="product_id">
                         <option value="" selected disabled>— Pilih Produk —</option>
                         @foreach ($products as $item)
-                            <option value="{{ $item->id }}">{{ $item->product_name }} - Rp. {{ $item->price }}</option>
+                            <option value="{{ $item->id }}" data-id="{{ $item->id }}"
+                                data-product_code="{{ $item->product_code }}" data-product_name="{{ $item->product_name }}"
+                                data-price="{{ $item->price }}" data-unit="{{ $item->unit }}">
+                                {{ $item->product_name }} - Rp. {{ $item->price }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-2">
-                <a href="#" class="btn btn-primary text-white" style="margin-top: 32px;">Tambah</a>
+                <a href="#" class="btn btn-primary text-white" style="margin-top: 32px;" id="btnAdd">Tambah</a>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="tableDetail">
                     <thead>
                         <tr>
                             <th>Produk Code</th>
@@ -80,8 +83,34 @@
                             <th>SubTotal</th>
                         </tr>
                     </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
             </div>
         </div>
     </form>
 @endsection
+@push('myscripts')
+    <script>
+        $(function() {
+            $('#btnAdd').click(function(e) {
+                e.preventDefault();
+                let productSelected = $("#product_id option:selected");
+                let productCode = productSelected.attr("product_code");
+                let productName = productSelected.attr("product_name");
+                let price = productSelected.attr("price");
+                let unit = productSelected.attr("unit");
+
+                let row = `<tr>
+                <td>${productCode}</td>
+                <td>${productName}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>`;
+                $("#tableDetail tbody").append(row);
+            });
+        })
+    </script>
+@endpush
